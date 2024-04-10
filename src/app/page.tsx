@@ -2,6 +2,7 @@ import JobCard from "@/components/Card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 import prisma from "../../db/db";
 import { filterJobs } from "./actions";
 
@@ -46,7 +47,9 @@ export default async function Home() {
         </div>
         <div className="flex-grow space-y-10">
           {jobs.map((job) => (
-            <JobCard key={job.id} job={job} />
+            <Link key={job.id} href={`/${job.slug}`}>
+              <JobCard job={job} />
+            </Link>
           ))}
         </div>
       </section>

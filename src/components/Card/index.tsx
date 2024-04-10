@@ -19,16 +19,19 @@ const JobCard = ({ job }: IJob) => {
       </div>
 
       <div className="flex-grow space-y-4">
-        <h3>{job.title}</h3>
-
+        <h3 className="text-foreground">{job.title}</h3>
         <span className="flex items-center gap-x-3">
           <Banknote size={16} /> <p>{formatCurrency(job.salary)}</p>
         </span>
-
-        <Globe2 size={16} />
-        <MapPin size={16} />
-        <Clock size={16} />
-        {/* <p>{job.description}</p> */}
+        <span className="flex items-center gap-x-3">
+          <Globe2 size={16} /> <p>{job.locationType}</p>
+        </span>{" "}
+        <span className="flex items-center gap-x-3">
+          <MapPin size={16} /> <p>{job.location}</p>
+        </span>{" "}
+        <span className="flex items-center gap-x-3">
+          <Clock size={16} /> <p>{job.type}</p>
+        </span>
       </div>
     </div>
   );
