@@ -1,12 +1,13 @@
 import { Job } from "@prisma/client";
 import { Banknote, Clock, Globe2, MapPin } from "lucide-react";
 import Image from "next/image";
+import { formatCurrency } from "../../../utils/formatCurrency";
 interface IJob {
   job: Job;
 }
 const JobCard = ({ job }: IJob) => {
   return (
-    <div className="flex justify-between gap-x-6 border">
+    <div className="flex justify-between gap-x-6 rounded-md border p-3 shadow-sm">
       <div>
         <Image
           width={100}
@@ -20,8 +21,8 @@ const JobCard = ({ job }: IJob) => {
       <div className="flex-grow space-y-4">
         <h3>{job.title}</h3>
 
-        <span className="flex items-center gap-x-4">
-          <p>{job.salary}</p> <Banknote size={16} />
+        <span className="flex items-center gap-x-3">
+          <Banknote size={16} /> <p>{formatCurrency(job.salary)}</p>
         </span>
 
         <Globe2 size={16} />
