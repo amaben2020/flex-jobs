@@ -27,7 +27,7 @@ export default async function Home() {
 
   const [jobs, location] = await Promise.all([jobPromise, locationPromise]);
 
-  console.log("location", location);
+  // console.log("location", location);
 
   return (
     <main className=" m-auto my-10 max-w-5xl space-y-10 px-3">
