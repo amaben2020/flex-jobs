@@ -13,10 +13,22 @@ export default async function Home() {
   });
 
   return (
-    <main className="p-5">
+    <main className=" m-auto my-10 max-w-5xl space-y-10 px-3">
       <Button>HOME</Button>
-      {JSON.stringify(jobs)}
-      <JobCard />
+
+      <section className="block justify-between gap-x-10 space-y-10 md:flex md:space-y-0">
+        <div className="max-w-full md:max-w-[260px]">
+          SIDEBAR Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Repudiandae exercitationem soluta sed ipsam, asperiores dignissimos
+          officiis dolorum provident in, debitis commodi, eligendi harum
+          excepturi fugiat eum quae perspiciatis modi ipsum!
+        </div>
+        <div className="flex-grow space-y-10">
+          {jobs.map((job) => (
+            <JobCard key={job.id} job={job} />
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
