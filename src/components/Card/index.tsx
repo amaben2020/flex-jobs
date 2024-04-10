@@ -7,7 +7,7 @@ interface IJob {
 }
 const JobCard = ({ job }: IJob) => {
   return (
-    <div className="flex justify-between gap-x-6 rounded-md border p-3 shadow-sm">
+    <div className="mb-4 flex justify-between gap-x-6 space-y-6 rounded-md border p-3 shadow-sm">
       <div>
         <Image
           width={100}

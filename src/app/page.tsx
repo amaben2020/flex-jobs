@@ -1,12 +1,18 @@
 import JobCard from "@/components/Card";
+import JobFilterSidebar from "@/components/JobFilterSidebar";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import prisma from "../../db/db";
 import { filterJobs } from "./actions";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: {
+    q: string;
+  };
+}) {
+  console.log(searchParams);
   const jobPromise = prisma?.job.findMany({
     where: {
       approved: true,
@@ -36,16 +42,9 @@ export default async function Home() {
 
       <section className="block justify-between gap-x-10 space-y-10 md:flex md:space-y-0">
         <div className="max-w-full md:max-w-[260px]">
-          <form action={filterJobs}>
-            <Label htmlFor="q" className="text-black">
-              Sidebar
-            </Label>
-            <Input name="q" />
-            <button type="submit">Submit</button>
-          </form>
-          {/* <JobFilterSidebar /> */}
+          <JobFilterSidebar action={filterJobs} />
         </div>
-        <div className="flex-grow space-y-10">
+        <div className="flex-grow">
           {jobs.map((job) => (
             <Link key={job.id} href={`/${job.slug}`}>
               <JobCard job={job} />
