@@ -24,6 +24,10 @@ const JobFilterSidebar = async ({
     distinct: ["location"],
   });
 
+  const jobLocations = locationData.filter((location) =>
+    Boolean(location.location),
+  );
+
   return (
     <aside className="sticky top-5 h-fit space-y-6 rounded-md border p-4">
       <form action={action}>
@@ -53,7 +57,7 @@ const JobFilterSidebar = async ({
           </Label>
           <select name="location" defaultValue={location || ""}>
             <option>All location</option>
-            {locationData.map((location) => (
+            {jobLocations.map((location) => (
               <option key={location.location}>{location.location}</option>
             ))}
           </select>
@@ -64,14 +68,15 @@ const JobFilterSidebar = async ({
           <Input
             placeholder="Remote"
             type="checkbox"
-            className="mr-auto cursor-pointer border accent-black"
+            className="mr-auto h-[25px] w-[40px] cursor-pointer border accent-black"
             name="remote"
             id="remote"
             defaultValue={remote === "true" ? "true" : "false"}
+            checked={remote === "true"}
           />
         </div>
 
-        <FormSubmitButton type="submit" className="mt-4 w-full">
+        <FormSubmitButton type="submit" className="mt-4">
           Submit
         </FormSubmitButton>
       </form>
