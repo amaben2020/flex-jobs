@@ -35,11 +35,15 @@ export default async function Home({ searchParams }: Readonly<IHomePage>) {
           <JobFilterSidebar action={filterJobs} filterValues={searchParams} />
         </div>
         <div className="flex-grow">
-          {jobs.map((job) => (
-            <Link key={job.id} href={`/${job.slug}`}>
-              <JobCard job={job} />
-            </Link>
-          ))}
+          {jobs.length ? (
+            jobs.map((job) => (
+              <Link key={job.id} href={`/${job.slug}`}>
+                <JobCard job={job} />
+              </Link>
+            ))
+          ) : (
+            <p>No Jobs Found</p>
+          )}
         </div>
       </section>
     </main>

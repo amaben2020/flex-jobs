@@ -12,9 +12,9 @@ const JobFilterSidebar = async ({
   action: (formData: FormData) => void;
   filterValues: Pick<IHomePage, "searchParams">["searchParams"];
 }) => {
-  const { q, type } = filterValues;
+  const { q, type, location, remote } = filterValues;
 
-  const location = await prisma.job.findMany({
+  const locationData = await prisma.job.findMany({
     where: {
       approved: true,
     },
@@ -25,7 +25,7 @@ const JobFilterSidebar = async ({
   });
 
   return (
-    <aside className="space-y-6 rounded-md border p-4">
+    <aside className="sticky top-5 h-fit space-y-6 rounded-md border p-4">
       <form action={action}>
         <div className="flex flex-col gap-y-4">
           <Label htmlFor="q" className="mb-3 text-foreground">
@@ -41,7 +41,7 @@ const JobFilterSidebar = async ({
           <Label htmlFor="type" className="mb-3 text-foreground">
             Type
           </Label>
-          <select name="type">
+          <select name="type" defaultValue={type || ""}>
             <option>All Types</option>
             {jobTypes.map((type) => (
               <option key={type}>{type}</option>
@@ -51,15 +51,23 @@ const JobFilterSidebar = async ({
           <Label htmlFor="location" className="mb-3 text-foreground">
             All Location
           </Label>
-
-          <select name="location">
+          <select name="location" defaultValue={location || ""}>
             <option>All location</option>
-            {location.map((location) => (
+            {locationData.map((location) => (
               <option key={location.location}>{location.location}</option>
             ))}
           </select>
 
-          <input type="checkox" name="remote" />
+          <Label htmlFor="location" className="mb-3 text-foreground">
+            Remote
+          </Label>
+
+          <input
+            type="checkbox"
+            className="scale-125 border accent-black"
+            name="remote"
+            defaultValue={remote || ""}
+          />
         </div>
 
         <FormSubmitButton type="submit" className="mt-4 w-full">
