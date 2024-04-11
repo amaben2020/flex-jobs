@@ -10,16 +10,38 @@ const JobFilterSidebar = ({
   action: (formData: FormData) => void;
   filterValues: Pick<IHomePage, "searchParams">["searchParams"];
 }) => {
-  const params = filterValues;
-  console.log("param", params);
+  const { q, type } = filterValues;
 
   return (
     <aside className="space-y-6 rounded-md border p-4">
       <form action={action}>
-        <Label htmlFor="q" className="mb-3 text-foreground">
-          Sidebar
-        </Label>
-        <Input name="q" placeholder="Search jobs" defaultValue={params?.q} />
+        <div className="flex flex-col gap-y-4">
+          <Label htmlFor="q" className="mb-3 text-foreground">
+            Sidebar
+          </Label>
+          <Input
+            type="search"
+            name="q"
+            placeholder="Search jobs"
+            defaultValue={q || ""}
+          />
+
+          <Label htmlFor="type" className="mb-3 text-foreground">
+            Type
+          </Label>
+          <select>
+            <option>All Types</option>
+          </select>
+
+          <Label htmlFor="location" className="mb-3 text-foreground">
+            All Location
+          </Label>
+          <select>
+            <option> All location</option>
+          </select>
+
+          <input type="checkox" />
+        </div>
 
         <FormSubmitButton type="submit" className="mt-4 w-full">
           Submit
