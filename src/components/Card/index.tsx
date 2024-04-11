@@ -33,6 +33,8 @@ const JobCard = ({ job }: IJob) => {
           <Clock size={16} /> <p>{job.type}</p>
         </span>
       </div>
+
+      <p>Posted on: </p>
     </div>
   );
 };
