@@ -9,7 +9,6 @@ const JobSearch = async ({
 }: {
   filters: Pick<IHomePage, "searchParams">["searchParams"];
 }) => {
-  // Filters and Queries: use the postgres search to filter queries AND, OR: https://www.prisma.io/docs/orm/prisma-client/queries/full-text-search
   const searchTerm = filters?.q?.length
     ? filters?.q.split(" ").join(" & ")
     : "";

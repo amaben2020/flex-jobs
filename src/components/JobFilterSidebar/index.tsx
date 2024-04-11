@@ -28,7 +28,7 @@ const JobFilterSidebar = async ({
     Boolean(location.location),
   );
 
-  console.log(remote);
+  console.log(remote === "true");
 
   return (
     <aside className="sticky top-5 h-fit space-y-6 rounded-md border p-4">
@@ -73,8 +73,8 @@ const JobFilterSidebar = async ({
             className="mr-auto h-[25px] w-[40px] cursor-pointer border accent-black"
             name="remote"
             id="remote"
-            defaultValue={remote === "true" ? "true" : "false"}
-            // checked={remote === "true" ? true : false}
+            defaultValue={remote}
+            // checked={remote === "true"}
           />
         </div>
 

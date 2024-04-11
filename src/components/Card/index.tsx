@@ -16,7 +16,7 @@ const JobCard = ({ job }: IJob) => {
         ? "bg-green-500"
         : "bg-blue-500";
   return (
-    <div className="mb-4 flex justify-between gap-x-6 space-y-3 rounded-md border p-2 shadow-sm">
+    <div className="mb-4 flex justify-between gap-x-6 space-y-1 rounded-md border p-2 shadow-sm hover:bg-gray-100">
       <div>
         <Image
           width={100}
