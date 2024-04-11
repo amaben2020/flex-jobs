@@ -3,10 +3,18 @@
 import { redirect } from "next/navigation";
 
 export const filterJobs = (formData: FormData) => {
-  const query = formData.get("q");
-  //Object.fromEntries:
-  console.log("FD", formData.entries());
-  console.log(query);
+  const allFormData = formData.entries();
 
-  redirect(`/?q=${query}`);
+  const { q, type, jobType, remote } = Object.fromEntries(allFormData);
+
+  const buildParams = {
+    ...(q && { q }),
+    ...(type && { type }),
+    ...(jobType && { jobType }),
+    ...(remote && { remote: "true" }),
+  };
+
+  const searchParams = new URLSearchParams(buildParams as any);
+  console.log("Search ", searchParams);
+  redirect(`/?${searchParams.toString()}`);
 };
