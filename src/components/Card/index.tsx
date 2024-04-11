@@ -1,11 +1,20 @@
 import { Job } from "@prisma/client";
+import { format } from "date-fns";
 import { Banknote, Clock, Globe2, MapPin } from "lucide-react";
 import Image from "next/image";
 import { formatCurrency } from "../../../utils/formatCurrency";
+import { Badge } from "../ui/badge";
+import { cn } from "@/lib/utils";
 interface IJob {
   job: Job;
 }
 const JobCard = ({ job }: IJob) => {
+  const renderLocationTypeColor =
+    job.locationType === "Hybrid"
+      ? "bg-yellow-500"
+      : job.locationType === "On-site"
+        ? "bg-green-500"
+        : "bg-blue-500";
   return (
     <div className="mb-4 flex justify-between gap-x-6 space-y-6 rounded-md border p-3 shadow-sm">
       <div>
@@ -20,6 +29,7 @@ const JobCard = ({ job }: IJob) => {
 
       <div className="flex-grow space-y-4">
         <h3 className="text-foreground">{job.title}</h3>
+        <Badge className={cn(renderLocationTypeColor)}>{job.type}</Badge>
         <span className="flex items-center gap-x-3">
           <Banknote size={16} /> <p>{formatCurrency(job.salary)}</p>
         </span>
@@ -30,11 +40,13 @@ const JobCard = ({ job }: IJob) => {
           <MapPin size={16} /> <p>{job.location}</p>
         </span>{" "}
         <span className="flex items-center gap-x-3">
-          <Clock size={16} /> <p>{job.type}</p>
+          <Clock size={16} />{" "}
+          <p>
+            Posted on:
+            {format(new Date(job?.createdAt), "yyyy-mm-dd")}
+          </p>
         </span>
       </div>
-
-      <p>Posted on: </p>
     </div>
   );
 };
