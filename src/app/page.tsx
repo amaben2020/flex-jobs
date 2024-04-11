@@ -1,7 +1,6 @@
-import JobCard from "@/components/Card";
 import JobFilterSidebar from "@/components/JobFilterSidebar";
-import Link from "next/link";
-import prisma from "../../db/db";
+
+import JobSearch from "@/components/JobSearch";
 import { filterJobs } from "./actions";
 
 export interface IHomePage {
@@ -13,16 +12,6 @@ export interface IHomePage {
   };
 }
 export default async function Home({ searchParams }: Readonly<IHomePage>) {
-  console.log(searchParams);
-  const jobs = await prisma?.job.findMany({
-    where: {
-      approved: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
   return (
     <main className="m-auto my-10 max-w-5xl space-y-10 px-3">
       <section className="mx-auto space-y-4 text-center">
@@ -35,15 +24,7 @@ export default async function Home({ searchParams }: Readonly<IHomePage>) {
           <JobFilterSidebar action={filterJobs} filterValues={searchParams} />
         </div>
         <div className="flex-grow">
-          {jobs.length ? (
-            jobs.map((job) => (
-              <Link key={job.id} href={`/${job.slug}`}>
-                <JobCard job={job} />
-              </Link>
-            ))
-          ) : (
-            <p>No Jobs Found</p>
-          )}
+          <JobSearch filters={searchParams} />
         </div>
       </section>
     </main>

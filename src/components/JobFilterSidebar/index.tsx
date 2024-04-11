@@ -28,6 +28,8 @@ const JobFilterSidebar = async ({
     Boolean(location.location),
   );
 
+  console.log(remote);
+
   return (
     <aside className="sticky top-5 h-fit space-y-6 rounded-md border p-4">
       <form action={action}>
@@ -72,7 +74,7 @@ const JobFilterSidebar = async ({
             name="remote"
             id="remote"
             defaultValue={remote === "true" ? "true" : "false"}
-            checked={remote === "true"}
+            // checked={remote === "true" ? true : false}
           />
         </div>
 
