@@ -58,15 +58,16 @@ const JobFilterSidebar = async ({
             ))}
           </select>
 
-          <Label htmlFor="location" className="mb-3 text-foreground">
+          <Label htmlFor="remote" className="mb-3 text-foreground">
             Remote
           </Label>
-
-          <input
+          <Input
+            placeholder="Remote"
             type="checkbox"
-            className="scale-125 border accent-black"
+            className="mr-auto cursor-pointer border accent-black"
             name="remote"
-            defaultValue={remote || ""}
+            id="remote"
+            defaultValue={remote === "true" ? "true" : "false"}
           />
         </div>
 

@@ -10,7 +10,7 @@ export const filterJobs = (formData: FormData) => {
   const buildParams = {
     ...(q && { q }),
     ...(location && { location }),
-    ...(type && { type }),
+    ...(type && type !== "All Types" && { type }),
     ...(remote && { remote: "true" }),
   };
 
