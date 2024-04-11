@@ -4,7 +4,7 @@ import Link from "next/link";
 import prisma from "../../db/db";
 import { filterJobs } from "./actions";
 
-interface IHomePage {
+export interface IHomePage {
   searchParams: {
     q: string;
     type: string;
@@ -35,11 +35,13 @@ export default async function Home({ searchParams }: Readonly<IHomePage>) {
 
   const [jobs, location] = await Promise.all([jobPromise, locationPromise]);
   // console.log(location);
+
+  console.log("sp", searchParams);
   return (
     <main className=" m-auto my-10 max-w-5xl space-y-10 px-3">
       <section className="block justify-between gap-x-10 space-y-10 md:flex md:space-y-0">
         <div className="max-w-full md:max-w-[260px]">
-          <JobFilterSidebar action={filterJobs} />
+          <JobFilterSidebar action={filterJobs} filterValues={searchParams} />
         </div>
         <div className="flex-grow">
           {jobs.map((job) => (
