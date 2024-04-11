@@ -1,10 +1,10 @@
+import { cn } from "@/lib/utils";
 import { Job } from "@prisma/client";
 import { format } from "date-fns";
 import { Banknote, Clock, Globe2, MapPin } from "lucide-react";
 import Image from "next/image";
 import { formatCurrency } from "../../../utils/formatCurrency";
 import { Badge } from "../ui/badge";
-import { cn } from "@/lib/utils";
 interface IJob {
   job: Job;
 }
@@ -16,7 +16,7 @@ const JobCard = ({ job }: IJob) => {
         ? "bg-green-500"
         : "bg-blue-500";
   return (
-    <div className="mb-4 flex justify-between gap-x-6 space-y-6 rounded-md border p-3 shadow-sm">
+    <div className="mb-4 flex justify-between gap-x-6 space-y-3 rounded-md border p-2 shadow-sm">
       <div>
         <Image
           width={100}

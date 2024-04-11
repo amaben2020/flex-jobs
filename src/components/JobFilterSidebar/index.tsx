@@ -1,9 +1,11 @@
 import { IHomePage } from "@/app/page";
+import { jobTypes } from "@/lib/job-type";
+import prisma from "../../../db/db";
 import FormSubmitButton from "../FormSubmitButton";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
-const JobFilterSidebar = ({
+const JobFilterSidebar = async ({
   action,
   filterValues,
 }: {
@@ -11,6 +13,16 @@ const JobFilterSidebar = ({
   filterValues: Pick<IHomePage, "searchParams">["searchParams"];
 }) => {
   const { q, type } = filterValues;
+
+  const location = await prisma.job.findMany({
+    where: {
+      approved: true,
+    },
+    select: {
+      location: true,
+    },
+    distinct: ["location"],
+  });
 
   return (
     <aside className="space-y-6 rounded-md border p-4">
@@ -29,18 +41,25 @@ const JobFilterSidebar = ({
           <Label htmlFor="type" className="mb-3 text-foreground">
             Type
           </Label>
-          <select>
+          <select name="type">
             <option>All Types</option>
+            {jobTypes.map((type) => (
+              <option key={type}>{type}</option>
+            ))}
           </select>
 
           <Label htmlFor="location" className="mb-3 text-foreground">
             All Location
           </Label>
-          <select>
-            <option> All location</option>
+
+          <select name="location">
+            <option>All location</option>
+            {location.map((location) => (
+              <option key={location.location}>{location.location}</option>
+            ))}
           </select>
 
-          <input type="checkox" />
+          <input type="checkox" name="remote" />
         </div>
 
         <FormSubmitButton type="submit" className="mt-4 w-full">
