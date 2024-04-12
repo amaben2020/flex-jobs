@@ -36,11 +36,11 @@ const JobFilterSidebar = async ({
     Boolean(location.location),
   );
 
-  console.log(remote === "true");
+  //the key on the form is super important so that React compares the old values with it and force React to rerender if there's a change
 
   return (
     <aside className="sticky top-5 h-fit space-y-6 rounded-md border p-4 transition-all duration-100">
-      <form action={action}>
+      <form action={action} key={JSON.stringify({ q, type, location, remote })}>
         <div className="flex flex-col gap-y-4">
           <Label htmlFor="q" className="mb-3 text-foreground">
             Sidebar
