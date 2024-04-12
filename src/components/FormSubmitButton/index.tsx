@@ -15,8 +15,10 @@ const FormSubmitButton = ({
 
   return (
     <Button {...props} type="submit" className={cn("mt-4 w-full", className)}>
-      {children}
-      {pending && <Loader2 size={16} className="animate-spin" />}
+      <span className="flex items-center gap-x-2">
+        <p> {children} </p>
+        {pending && <Loader2 size={16} className="animate-spin" />}
+      </span>
     </Button>
   );
 };
