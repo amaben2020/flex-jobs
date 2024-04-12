@@ -1,10 +1,4 @@
-import { Loader2 } from "lucide-react";
-const Loading = () => {
-  return (
-    <div className="mx-auto my-auto">
-      <Loader2 size={50} className="animate-spin" />
-    </div>
-  );
-};
+import Loading from "@/components/layout/Page/Loading";
+const LoadingUI = () => <Loading />;
 
-export default Loading;
+export default LoadingUI;
