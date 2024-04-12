@@ -1,3 +1,5 @@
+import Header from "@/components/Header";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
@@ -17,7 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={cn(
+          inter.className,
+          "m-auto my-10 max-w-5xl space-y-10 px-3",
+        )}
+      >
+        <Header />
         <NextTopLoader />
         {children}
       </body>

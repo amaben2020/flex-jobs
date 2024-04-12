@@ -12,6 +12,7 @@ const JobFilterSidebar = async ({
   action: (formData: FormData) => void;
   filterValues: Pick<IHomePage, "searchParams">["searchParams"];
 }) => {
+  // use the zod parse function to validate server side
   const { q, type, location, remote } = filterValues;
 
   const locationData = await prisma.job.findMany({
@@ -44,20 +45,28 @@ const JobFilterSidebar = async ({
             defaultValue={q || ""}
           />
 
-          <Label htmlFor="type" className="mb-3 text-foreground">
+          <Label htmlFor="type" className="mb-1 mt-3 text-foreground">
             Type
           </Label>
-          <select name="type" defaultValue={type || ""}>
+          <select
+            name="type"
+            defaultValue={type || ""}
+            className="shadcn-input"
+          >
             <option>All Types</option>
             {jobTypes.map((type) => (
               <option key={type}>{type}</option>
             ))}
           </select>
 
-          <Label htmlFor="location" className="mb-3 text-foreground">
+          <Label htmlFor="location" className="mb-1 mt-3 text-foreground">
             All Location
           </Label>
-          <select name="location" defaultValue={location || ""}>
+          <select
+            className="shadcn-input"
+            name="location"
+            defaultValue={location || ""}
+          >
             <option>All location</option>
             {jobLocations.map((location) => (
               <option key={location.location}>{location.location}</option>
@@ -65,7 +74,7 @@ const JobFilterSidebar = async ({
           </select>
 
           <Label htmlFor="remote" className="mb-3 text-foreground">
-            Remote
+            Remote Jobs
           </Label>
           <Input
             placeholder="Remote"

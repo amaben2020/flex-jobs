@@ -13,7 +13,7 @@ export interface IHomePage {
 }
 export default async function Home({ searchParams }: Readonly<IHomePage>) {
   return (
-    <main className="m-auto my-10 max-w-5xl space-y-10 px-3">
+    <main>
       <section className="mx-auto space-y-4 text-center">
         <h1 className="text-5xl font-bold text-gray-800">All developer jobs</h1>
 
