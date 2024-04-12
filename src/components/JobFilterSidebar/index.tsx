@@ -49,7 +49,7 @@ const JobFilterSidebar = async ({
             type="search"
             name="q"
             placeholder="Search jobs"
-            defaultValue={q || ""}
+            defaultValue={q ?? ""}
           />
 
           <Label htmlFor="type" className="mb-1 mt-3 text-foreground">
@@ -57,7 +57,7 @@ const JobFilterSidebar = async ({
           </Label>
           <select
             name="type"
-            defaultValue={type || ""}
+            defaultValue={type ?? ""}
             className="shadcn-input"
           >
             <option>All Types</option>
@@ -72,7 +72,7 @@ const JobFilterSidebar = async ({
           <select
             className="shadcn-input"
             name="location"
-            defaultValue={location || ""}
+            defaultValue={location ?? ""}
           >
             <option>All location</option>
             {jobLocations.map((location) => (
@@ -88,9 +88,9 @@ const JobFilterSidebar = async ({
             type="checkbox"
             className="mr-auto h-[25px] w-[40px] cursor-pointer border accent-black"
             name="remote"
-            id="remote"
-            defaultValue={remote}
-            // checked={remote === "true"}
+            defaultValue={String(remote)}
+            value={String(remote)}
+            // checked={String(remote) === "true"}
           />
         </div>
 
