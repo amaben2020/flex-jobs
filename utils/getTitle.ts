@@ -1,21 +1,21 @@
 export const getTitle = ({
   q,
-  jobType,
+  type,
   location,
   remote,
 }: {
   q: string;
-  jobType: string;
+  type: string;
   location: string;
   remote: string;
 }) => {
   const titlePrefix = q
     ? `${q} jobs`
-    : jobType
-      ? `${jobType} developer`
+    : type
+      ? `${type} developer`
       : remote
         ? `Remote dev jobs`
-        : "";
+        : "All developer jobs";
 
   const titleSuffix = location ? `in ${location} ` : "";
 

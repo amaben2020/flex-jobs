@@ -1,8 +1,11 @@
 import { IHomePage } from "@/app/page";
 import { jobTypes } from "@/lib/job-type";
 import { jobFiltersValidation } from "@/schema/jobFiltersValidation";
+import { ListFilter } from "lucide-react";
+import Link from "next/link";
 import prisma from "../../../db/db";
 import FormSubmitButton from "../FormSubmitButton";
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
@@ -17,10 +20,8 @@ const JobFilterSidebar = async ({
 
   const { q, type, location, remote } =
     jobFiltersValidation.parse(filterValues);
-  console.log(
-    "jobFiltersValidation.parse(filterValues)",
-    jobFiltersValidation.parse(filterValues),
-  );
+  const isClearable =
+    q?.length || type?.length || location?.length || remote === "true";
   const locationData = await prisma.job.findMany({
     where: {
       approved: true,
@@ -38,7 +39,7 @@ const JobFilterSidebar = async ({
   console.log(remote === "true");
 
   return (
-    <aside className="sticky top-5 h-fit space-y-6 rounded-md border p-4">
+    <aside className="sticky top-5 h-fit space-y-6 rounded-md border p-4 transition-all duration-100">
       <form action={action}>
         <div className="flex flex-col gap-y-4">
           <Label htmlFor="q" className="mb-3 text-foreground">
@@ -97,6 +98,17 @@ const JobFilterSidebar = async ({
           Submit
         </FormSubmitButton>
       </form>
+
+      {isClearable && (
+        <Button asChild variant="ghost" className="w-full font-bold">
+          <Link href="/">
+            <span className="flex items-center gap-x-2">
+              <p> Clear Filter</p>
+              <ListFilter size={16} />
+            </span>
+          </Link>
+        </Button>
+      )}
     </aside>
   );
 };

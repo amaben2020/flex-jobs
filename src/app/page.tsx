@@ -1,6 +1,7 @@
 import JobFilterSidebar from "@/components/JobFilterSidebar";
 
 import JobSearch from "@/components/JobSearch";
+import { getTitle } from "../../utils/getTitle";
 import { filterJobs } from "./actions";
 
 export interface IHomePage {
@@ -15,7 +16,9 @@ export default async function Home({ searchParams }: Readonly<IHomePage>) {
   return (
     <main>
       <section className="mx-auto space-y-4 text-center">
-        <h1 className="text-5xl font-bold text-gray-800">All developer jobs</h1>
+        <h1 className="text-5xl font-bold text-gray-800">
+          {getTitle(searchParams)}
+        </h1>
 
         <h2 className="text-xl text-gray-600">Find your dream job.</h2>
       </section>
