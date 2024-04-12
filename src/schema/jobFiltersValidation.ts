@@ -6,3 +6,5 @@ export const jobFiltersValidation = z.object({
   location: z.string().optional(),
   remote: z.string().optional(),
 });
+
+export type TJobFilterSchema = z.infer<typeof jobFiltersValidation>;

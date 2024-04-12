@@ -1,5 +1,6 @@
 import { IHomePage } from "@/app/page";
 import { jobTypes } from "@/lib/job-type";
+import { jobFiltersValidation } from "@/schema/jobFiltersValidation";
 import prisma from "../../../db/db";
 import FormSubmitButton from "../FormSubmitButton";
 import { Input } from "../ui/input";
@@ -13,8 +14,13 @@ const JobFilterSidebar = async ({
   filterValues: Pick<IHomePage, "searchParams">["searchParams"];
 }) => {
   // use the zod parse function to validate server side
-  const { q, type, location, remote } = filterValues;
 
+  const { q, type, location, remote } =
+    jobFiltersValidation.parse(filterValues);
+  console.log(
+    "jobFiltersValidation.parse(filterValues)",
+    jobFiltersValidation.parse(filterValues),
+  );
   const locationData = await prisma.job.findMany({
     where: {
       approved: true,

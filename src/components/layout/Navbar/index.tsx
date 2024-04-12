@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/button";
-import logo from "./../../app/assets/logo.png";
-const Header = () => {
+import { Button } from "../../ui/button";
+import logo from "./../../../app/assets/logo.png";
+const Navbar = () => {
   return (
     <header>
       <nav className="flex items-center justify-between">
@@ -16,4 +16,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;

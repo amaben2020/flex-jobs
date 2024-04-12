@@ -15,6 +15,7 @@ const JobCard = ({ job }: IJob) => {
       : job.locationType === "On-site"
         ? "bg-green-500"
         : "bg-blue-500";
+
   return (
     <div className="mb-4 flex justify-between gap-x-6 space-y-1 rounded-md border p-2 shadow-sm hover:bg-gray-100">
       <div>
@@ -29,7 +30,9 @@ const JobCard = ({ job }: IJob) => {
 
       <div className="flex-grow space-y-4">
         <h3 className="text-foreground">{job.title}</h3>
-        <Badge className={cn(renderLocationTypeColor)}>{job.type}</Badge>
+        <Badge className={cn(renderLocationTypeColor)}>
+          {job.locationType}
+        </Badge>
         <span className="flex items-center gap-x-3">
           <Banknote size={16} /> <p>{formatCurrency(job.salary)}</p>
         </span>
