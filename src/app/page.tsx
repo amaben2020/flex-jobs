@@ -15,7 +15,7 @@ export interface IHomePage {
 export default async function Home({ searchParams }: Readonly<IHomePage>) {
   return (
     <main>
-      <section className="mx-auto space-y-4 text-center">
+      <section className="mx-auto my-10 space-y-4 text-center ">
         <h1 className="text-5xl font-bold text-gray-800">
           {getTitle(searchParams)}
         </h1>
