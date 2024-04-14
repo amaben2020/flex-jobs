@@ -3,6 +3,7 @@ import JobFilterSidebar from "@/components/JobFilterSidebar";
 import JobSearch from "@/components/JobSearch";
 import { getTitle } from "../../utils/getTitle";
 import { filterJobs } from "./actions";
+import InfoTitle from "@/components/InfoTitle";
 
 export interface IHomePage {
   searchParams: {
@@ -15,13 +16,7 @@ export interface IHomePage {
 export default async function Home({ searchParams }: Readonly<IHomePage>) {
   return (
     <main>
-      <section className="mx-auto my-10 space-y-4 text-center ">
-        <h1 className="text-5xl font-bold text-gray-800">
-          {getTitle(searchParams)}
-        </h1>
-
-        <h2 className="text-xl text-gray-600">Find your dream job.</h2>
-      </section>
+      <InfoTitle searchParams={searchParams} subText="Find your dream job." />
       <section className="block justify-between gap-x-10 space-y-10 md:flex md:space-y-0">
         <div className="max-w-full md:max-w-[260px]">
           <JobFilterSidebar action={filterJobs} filterValues={searchParams} />

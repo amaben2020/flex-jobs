@@ -9,7 +9,7 @@ const Navbar = () => {
         <Image src={logo} alt="" height={70} width={80} />
 
         <Button asChild>
-          <Link href="/create-job"> Post Jobs</Link>
+          <Link href="/jobs/new"> Post Jobs</Link>
         </Button>
       </nav>
     </header>
