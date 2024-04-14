@@ -18,6 +18,9 @@ import { optional } from "zod";
 import FormSubmitButton from "../FormSubmitButton";
 import LocationInput from "../LocationInput";
 import { Label } from "../ui/label";
+import RichTextEditor from "../RichTextEditor/RichTextEditor";
+import { draftToMarkdown } from "markdown-draft-js";
+import LoadingButton from "../LoadingButton";
 
 const NewJobForm = () => {
   const form = useForm<TCreateJobSchema>({
@@ -58,6 +61,24 @@ const NewJobForm = () => {
                     <FormLabel>Title</FormLabel>
                     <FormControl>
                       <Input placeholder="eg Frontend developer" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={control}
+                name="salary"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Title</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="eg Frontend developer"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -148,6 +169,36 @@ const NewJobForm = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={control}
+                name="locationType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-black">
+                      Type of Location
+                    </FormLabel>
+                    <select
+                      onChange={(e) => {
+                        field.onChange(e);
+                        if (e.currentTarget.value === "Remote") {
+                          trigger("location");
+                        }
+                      }}
+                      // {...field}
+                      defaultValue=""
+                      className="shadcn-input ml-3"
+                    >
+                      <option value="">Select an option</option>
+                      {locationTypes.map((jobType) => (
+                        <option key={jobType} value={jobType}>
+                          {jobType}
+                        </option>
+                      ))}
+                    </select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <div className="space-y-2">
                 <Label htmlFor="applicationEmail">How to apply</Label>
@@ -197,32 +248,23 @@ const NewJobForm = () => {
                 />
               </div>
 
-              <p className="text-black"> {watch("locationType")} </p>
               <FormField
                 control={control}
-                name="locationType"
+                name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-black">
-                      Type of Location
-                    </FormLabel>
-                    <select
+                    <FormLabel>Job Description</FormLabel>
+                    <RichTextEditor
                       {...field}
-                      defaultValue=""
-                      className="shadcn-input ml-3"
-                    >
-                      <option value="">Select an option</option>
-                      {locationTypes.map((jobType) => (
-                        <option key={jobType} value={jobType}>
-                          {jobType}
-                        </option>
-                      ))}
-                    </select>
-                    <FormMessage />
+                      onChange={(draft) => draftToMarkdown(draft)}
+                      ref={field.ref}
+                    />
                   </FormItem>
                 )}
               />
-              <FormSubmitButton>Submit</FormSubmitButton>
+              <LoadingButton type="submit" loading={isSubmitting}>
+                Submit
+              </LoadingButton>
             </form>
           </Form>
         </div>
