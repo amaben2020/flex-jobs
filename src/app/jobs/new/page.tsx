@@ -1,11 +1,14 @@
+import InfoTitle from "@/components/InfoTitle";
 import React from "react";
 
 const CreateJob = () => {
   return (
-    <div>
-      Find your perfect developer Get your job posting seen by thousands of job
-      seekers.
-    </div>
+    <main>
+      <InfoTitle
+        mainText="Find your perfect developer"
+        subText="Get your job posting seen by thousands of job seekers."
+      />
+    </main>
   );
 };
 

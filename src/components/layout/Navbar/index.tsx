@@ -6,7 +6,11 @@ const Navbar = () => {
   return (
     <header>
       <nav className="flex items-center justify-between">
-        <Image src={logo} alt="" height={70} width={80} />
+        <Button asChild variant="ghost">
+          <Link href="/">
+            <Image src={logo} alt="" height={70} width={80} />
+          </Link>
+        </Button>
 
         <Button asChild>
           <Link href="/jobs/new"> Post Jobs</Link>
