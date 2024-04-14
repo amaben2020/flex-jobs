@@ -1,7 +1,11 @@
-"use client";
-
 import InfoTitle from "@/components/InfoTitle";
+import NewJobForm from "@/components/NewJobForm";
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Post a new job",
+};
 
 const CreateJob = () => {
   return (
@@ -11,7 +15,7 @@ const CreateJob = () => {
         subText="Get your job posting seen by thousands of job seekers."
       />
 
-      <form action=""></form>
+      <NewJobForm />
     </main>
   );
 };
