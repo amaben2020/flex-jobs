@@ -18,6 +18,12 @@ const config = {
       },
     },
     extend: {
+      textColor: {
+        primary: {
+          DEFAULT: "#d4d4d4",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
