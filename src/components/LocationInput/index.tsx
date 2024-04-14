@@ -43,11 +43,20 @@ const LocationInput = forwardRef((props: ILocationInput, ref) => {
         <div>{!cities.length && <p>No Result found</p>}</div>
       )}
 
-      {cities.map((city: any) => (
-        <button key={city} className="block w-full divide-y p-2 text-start">
-          {city}
-        </button>
-      ))}
+      {hasFocus &&
+        cities.map((city: any) => (
+          <button
+            onMouseDown={(e) => {
+              e.preventDefault();
+              props.onLocationSelected(city);
+              setLocationSearchInput("");
+            }}
+            key={city}
+            className="block w-full divide-y p-2 text-start"
+          >
+            {city}
+          </button>
+        ))}
     </>
   );
 });

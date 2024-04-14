@@ -124,12 +124,15 @@ const NewJobForm = () => {
                   );
                 }}
               />
+
               <FormField
                 control={control}
-                name="locationType"
+                name="location"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Location </FormLabel>
+                    <FormLabel>
+                      Location {watch("location") && `: ${watch("location")}`}{" "}
+                    </FormLabel>
                     <FormControl>
                       <LocationInput
                         type="search"
