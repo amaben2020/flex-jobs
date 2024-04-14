@@ -10,6 +10,7 @@ interface ILocationInput extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 const LocationInput = forwardRef((props: ILocationInput, ref) => {
   const [locationSearchInput, setLocationSearchInput] = useState("");
+  const [hasFocus, setHasFocus] = useState(false);
   const cities = useMemo(() => {
     if (!locationSearchInput.trim()) {
       return [];
@@ -29,6 +30,8 @@ const LocationInput = forwardRef((props: ILocationInput, ref) => {
   return (
     <>
       <Input
+        onFocus={() => setHasFocus(true)}
+        onBlur={() => setHasFocus(false)}
         {...props}
         //@ts-ignore
         ref={ref}
@@ -36,16 +39,15 @@ const LocationInput = forwardRef((props: ILocationInput, ref) => {
         onChange={(e) => setLocationSearchInput(e.target.value)}
       />
 
-      {locationSearchInput.trim() && (
+      {locationSearchInput.trim() && hasFocus && (
         <div>{!cities.length && <p>No Result found</p>}</div>
       )}
 
       {cities.map((city: any) => (
-        <button key={city} className="block w-full p-2 text-start">
+        <button key={city} className="block w-full divide-y p-2 text-start">
           {city}
         </button>
       ))}
-      {JSON.stringify(cities)}
     </>
   );
 });
