@@ -2,7 +2,7 @@ export const jobTypes = [
   "Full-time",
   "Part-time",
   "Contract",
-  "Tempoary",
+  "Temporary",
   "Internship",
   "Volunteer",
 ];
