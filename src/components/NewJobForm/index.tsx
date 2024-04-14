@@ -13,6 +13,8 @@ import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
 import { createJobSchema, TCreateJobSchema } from "@/schema/createJobSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { jobTypes } from "@/lib/job-type";
+import { optional } from "zod";
 
 const NewJobForm = () => {
   const form = useForm<TCreateJobSchema>({
@@ -38,7 +40,7 @@ const NewJobForm = () => {
           <h2>Job Details</h2>
 
           <Form {...form}>
-            {/* novalidate disables browser validation */}
+            {/* novalidate disables default browser validation */}
             <form
               action=""
               className="space-y-4"
@@ -50,14 +52,30 @@ const NewJobForm = () => {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter a job title" {...field} />
+                      <Input placeholder="eg Frontend developer" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
                     <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={control}
+                name="type"
+                render={(field) => (
+                  <FormItem>
+                    <FormLabel>Job Type</FormLabel>
+                    <select {...field} defaultValue="">
+                      <option value="">Select an option</option>
+
+                      {jobTypes.map((jobType) => (
+                        <option key={jobType} value={jobType}>
+                          {jobType}
+                        </option>
+                      ))}
+                    </select>
                   </FormItem>
                 )}
               />
