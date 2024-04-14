@@ -1,13 +1,6 @@
 "use client";
 /* eslint-disable react/display-name */
-import React, {
-  ForwardedRef,
-  forwardRef,
-  MutableRefObject,
-  RefObject,
-  useMemo,
-  useState,
-} from "react";
+import React, { forwardRef, MutableRefObject, useMemo, useState } from "react";
 import { Input } from "../ui/input";
 import { citiesList } from "./../../../lib/cities-list";
 
