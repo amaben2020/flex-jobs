@@ -64,10 +64,11 @@ const NewJobForm = () => {
                 )}
               />
 
+              {watch("type")}
               <FormField
                 control={control}
                 name="type"
-                render={(field) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Job Type</FormLabel>
                     <select
@@ -121,6 +122,7 @@ const NewJobForm = () => {
                           accept="image/*"
                         />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   );
                 }}
@@ -142,6 +144,7 @@ const NewJobForm = () => {
                         ref={field.ref}
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -165,6 +168,7 @@ const NewJobForm = () => {
                           {...field}
                         />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -187,17 +191,21 @@ const NewJobForm = () => {
                           {...field}
                         />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
               </div>
 
+              <p className="text-black"> {watch("locationType")} </p>
               <FormField
                 control={control}
                 name="locationType"
-                render={(field) => (
+                render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Location Type</FormLabel>
+                    <FormLabel className="text-black">
+                      Type of Location
+                    </FormLabel>
                     <select
                       {...field}
                       defaultValue=""
@@ -210,6 +218,7 @@ const NewJobForm = () => {
                         </option>
                       ))}
                     </select>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
