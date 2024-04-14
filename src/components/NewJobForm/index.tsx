@@ -17,6 +17,7 @@ import { jobTypes, locationTypes } from "@/lib/job-type";
 import { optional } from "zod";
 import FormSubmitButton from "../FormSubmitButton";
 import LocationInput from "../LocationInput";
+import { Label } from "../ui/label";
 
 const NewJobForm = () => {
   const form = useForm<TCreateJobSchema>({
@@ -139,6 +140,44 @@ const NewJobForm = () => {
                         placeholder="Search for city"
                         onLocationSelected={field.onChange}
                         ref={field.ref}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <div className="space-y-2">
+                <Label htmlFor="applicationEmail">How to apply</Label>
+              </div>
+
+              <FormField
+                name="applicationEmail"
+                control={control}
+                render={(field) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        id="applicationEmail"
+                        placeholder="Email"
+                        type="email"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                name="applicationUrl"
+                control={control}
+                render={(field) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        id="applicationUrl"
+                        placeholder="Enter url e.g www."
+                        type="url"
+                        {...field}
                       />
                     </FormControl>
                   </FormItem>
