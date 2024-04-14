@@ -150,39 +150,47 @@ const NewJobForm = () => {
                 <Label htmlFor="applicationEmail">How to apply</Label>
               </div>
 
-              <FormField
-                name="applicationEmail"
-                control={control}
-                render={(field) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        id="applicationEmail"
-                        placeholder="Email"
-                        type="email"
-                        {...field}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                name="applicationUrl"
-                control={control}
-                render={(field) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        id="applicationUrl"
-                        placeholder="Enter url e.g www."
-                        type="url"
-                        {...field}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+              <div className="flex items-center justify-between">
+                {/* The email is only required when we do not provide application url */}
+                <FormField
+                  name="applicationEmail"
+                  control={control}
+                  render={(field) => (
+                    <FormItem className="grow">
+                      <FormControl>
+                        <Input
+                          id="applicationEmail"
+                          placeholder="Email"
+                          type="email"
+                          {...field}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <p className="mx-3">OR</p>
+                <FormField
+                  name="applicationUrl"
+                  control={control}
+                  render={(field) => (
+                    <FormItem className="grow">
+                      <FormControl>
+                        <Input
+                          id="applicationUrl"
+                          placeholder="Enter url e.g www."
+                          type="url"
+                          onChange={(e) => {
+                            field.field.onChange(e);
+                            // trigger the applicationEmail validation
+                            trigger("applicationEmail");
+                          }}
+                          {...field}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <FormField
                 control={control}
