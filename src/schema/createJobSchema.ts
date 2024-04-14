@@ -57,3 +57,5 @@ export const createJobSchema = z
   })
   .and(applicationSchema)
   .and(locationSchema);
+
+export type TCreateJobSchema = z.infer<typeof createJobSchema>;
