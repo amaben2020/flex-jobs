@@ -1,28 +1,24 @@
 "use client";
-import React from "react";
+import { createJobPosting } from "@/app/jobs/new/actions";
+import { jobTypes, locationTypes } from "@/lib/job-type";
+import { createJobSchema, TCreateJobSchema } from "@/schema/createJobSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { X } from "lucide-react";
+import { draftToMarkdown } from "markdown-draft-js";
+import { useForm } from "react-hook-form";
+import LoadingButton from "../LoadingButton";
+import LocationInput from "../LocationInput";
+import RichTextEditor from "../RichTextEditor/RichTextEditor";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { useForm } from "react-hook-form";
-import { createJobSchema, TCreateJobSchema } from "@/schema/createJobSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { jobTypes, locationTypes } from "@/lib/job-type";
-import { optional } from "zod";
-import FormSubmitButton from "../FormSubmitButton";
-import LocationInput from "../LocationInput";
 import { Label } from "../ui/label";
-import RichTextEditor from "../RichTextEditor/RichTextEditor";
-import { draftToMarkdown } from "markdown-draft-js";
-import LoadingButton from "../LoadingButton";
-import { createJobPosting } from "@/app/jobs/new/actions";
-import { X } from "lucide-react";
 
 const NewJobForm = () => {
   const form = useForm<TCreateJobSchema>({
