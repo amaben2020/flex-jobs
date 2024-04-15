@@ -19,7 +19,6 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-
 const NewJobForm = () => {
   const form = useForm<TCreateJobSchema>({
     resolver: zodResolver(createJobSchema),
