@@ -1,6 +1,5 @@
-import React from "react";
-import { getTitle } from "../../../utils/getTitle";
 import { IHomePage } from "@/app/page";
+import { getTitle } from "../../../utils/getTitle";
 
 const InfoTitle = ({
   mainText,
@@ -21,6 +20,7 @@ const InfoTitle = ({
           {getTitle(searchParams)}
         </h1>
       )}
+
       <h2 className="text-xl text-gray-600">{subText}</h2>
     </section>
   );
