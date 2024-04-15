@@ -22,7 +22,8 @@
       "@utils/*": ["./utils/*"],
       "@schema/*": ["./schema/*"],
       "@lib/*": ["./lib/*"],
-      "@components/*": ["./components/*"]
+      "@components/*": ["./components/*"],
+      "@db/*": ["./db/*"]
     }
   },
   "include": [

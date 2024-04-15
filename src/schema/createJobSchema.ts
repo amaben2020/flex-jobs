@@ -4,18 +4,15 @@ import { z } from "zod";
 const requiredString = z.string().min(1, "Required");
 const numericRequiredString = requiredString.regex(/^\d+$/, "Must be a number");
 
-const applicationSchema = z.object({
-  applicationEmail: z.string().max(100).email().optional().or(z.literal("")),
-  applicationUrl: z
-    .string()
-    .max(100)
-    .url()
-    .optional()
-    .refine((data: any) => data.applicationEmail | data.applicationUrl, {
-      message: "Email or URL is required",
-      path: ["applicationEmail"],
-    }),
-});
+const applicationSchema = z
+  .object({
+    applicationEmail: z.string().max(100).email().optional().or(z.literal("")),
+    applicationUrl: z.string().max(100).url().optional(),
+  })
+  .refine((data: any) => data?.applicationEmail || data?.applicationUrl, {
+    message: "Email or URL is required",
+    path: ["applicationEmail"],
+  });
 const locationSchema = z.object({
   locationType: requiredString.refine(
     (value) => locationTypes.includes(value),

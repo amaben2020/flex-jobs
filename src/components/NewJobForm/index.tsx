@@ -21,6 +21,8 @@ import { Label } from "../ui/label";
 import RichTextEditor from "../RichTextEditor/RichTextEditor";
 import { draftToMarkdown } from "markdown-draft-js";
 import LoadingButton from "../LoadingButton";
+import { createJobPosting } from "@/app/jobs/new/actions";
+import { X } from "lucide-react";
 
 const NewJobForm = () => {
   const form = useForm<TCreateJobSchema>({
@@ -37,7 +39,21 @@ const NewJobForm = () => {
     setFocus,
   } = form;
   const onSubmit = async (values: TCreateJobSchema) => {
+    const formData = new FormData();
+
+    // converting the values from RHF to formData
+    Object.entries(values).forEach(([key, value]) => {
+      if (value) {
+        formData.append(key, value);
+      }
+    });
     console.log(values);
+
+    try {
+      await createJobPosting(formData);
+    } catch (error) {
+      alert(error);
+    }
   };
   return (
     <main className="m-auto my-10 max-w-3xl space-x-10">
@@ -66,13 +82,26 @@ const NewJobForm = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={control}
+                name="companyName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Company Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="eg Stripe" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <FormField
                 control={control}
                 name="salary"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>Salary</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -104,20 +133,6 @@ const NewJobForm = () => {
                         </option>
                       ))}
                     </select>
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={control}
-                name="companyName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Company Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="eg Stripe" {...field} />
-                    </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -165,6 +180,19 @@ const NewJobForm = () => {
                         ref={field.ref}
                       />
                     </FormControl>
+                    {watch("location") && (
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setValue("location", "", { shouldValidate: true });
+                          }}
+                        >
+                          <X size={20} />
+                        </button>
+                        <span className="text-sm">{watch("location")}</span>
+                      </div>
+                    )}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -209,7 +237,7 @@ const NewJobForm = () => {
                 <FormField
                   name="applicationEmail"
                   control={control}
-                  render={(field) => (
+                  render={({ field }) => (
                     <FormItem className="grow">
                       <FormControl>
                         <Input
@@ -224,6 +252,7 @@ const NewJobForm = () => {
                   )}
                 />
                 <p className="mx-3">OR</p>
+
                 <FormField
                   name="applicationUrl"
                   control={control}
@@ -253,7 +282,9 @@ const NewJobForm = () => {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Job Description</FormLabel>
+                    <Label onClick={() => setFocus("description")}>
+                      Description
+                    </Label>
                     <RichTextEditor
                       {...field}
                       onChange={(draft) => draftToMarkdown(draft)}
