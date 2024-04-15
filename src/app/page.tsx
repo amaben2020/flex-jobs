@@ -15,11 +15,7 @@ export interface IHomePage {
 export default async function Home({ searchParams }: Readonly<IHomePage>) {
   return (
     <main>
-      <InfoTitle
-        mainText="All Developer Jobs"
-        searchParams={searchParams}
-        subText="Find your dream job."
-      />
+      <InfoTitle searchParams={searchParams} subText="Find your dream job." />
       <section className="block justify-between gap-x-10 space-y-10 md:flex md:space-y-0">
         <div className="max-w-full md:max-w-[260px]">
           <JobFilterSidebar action={filterJobs} filterValues={searchParams} />
