@@ -64,7 +64,7 @@ const JobSearch = async ({
   const countPromise = prisma.job.count();
 
   const [jobs, count] = await Promise.all([jobsPromise, countPromise]);
-  console.log(count);
+
   return (
     <div>
       {jobs?.length ? (
