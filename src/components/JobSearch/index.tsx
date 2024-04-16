@@ -67,8 +67,8 @@ const JobSearch = async ({
   console.log(count);
   return (
     <div>
-      {jobs.length ? (
-        jobs.map((job) => (
+      {jobs?.length ? (
+        jobs?.map((job) => (
           <Link key={job.id} href={`/jobs/${job.slug}`}>
             <JobCard job={job} />
           </Link>
@@ -77,7 +77,7 @@ const JobSearch = async ({
         <p>No Jobs Found</p>
       )}
 
-      {jobs.length > 0 && (
+      {jobs?.length > 0 && (
         <Pagination
           currentPage={page}
           totalPages={Math.ceil(count / jobsPerPage)}
