@@ -8,13 +8,14 @@ import prisma from "../../../db/db";
 
 const JobSearch = async ({
   filters,
-  page,
+  page = 0,
 }: {
   filters: Pick<IHomePage, "searchParams">["searchParams"];
   page?: number;
 }) => {
   const jobsPerPage = 6;
-  const skip = (Number(page) - 1) * jobsPerPage;
+
+  const skip = Number(page) * jobsPerPage;
 
   const searchTerm = filters?.q?.length
     ? filters?.q.split(" ").join(" & ")
@@ -110,7 +111,7 @@ function Pagination({
       <Link
         href={generatePageLink(currentPage - 1)}
         className={cn(
-          currentPage <= 1 && "invisible",
+          currentPage <= 0 && "invisible",
           "flex items-center gap-2 font-semibold",
         )}
       >
@@ -120,13 +121,13 @@ function Pagination({
 
       <span>
         {" "}
-        Page{currentPage} of {totalPages}
+        Page{currentPage + 1} of {totalPages}
       </span>
 
       <Link
         href={generatePageLink(currentPage + 1)}
         className={cn(
-          // currentPage > 1 && "invisible",
+          currentPage + 1 >= totalPages && "invisible",
           "flex items-center gap-2 font-semibold",
         )}
       >
