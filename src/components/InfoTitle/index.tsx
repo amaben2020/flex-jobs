@@ -8,7 +8,7 @@ const InfoTitle = ({
 }: {
   subText: string;
   mainText?: string;
-  searchParams: IHomePage["searchParams"];
+  searchParams?: IHomePage["searchParams"];
 }) => {
   return (
     <section className="mx-auto my-10 space-y-4 text-center ">
@@ -16,7 +16,7 @@ const InfoTitle = ({
         <h1 className="text-5xl font-bold text-gray-800">{mainText}</h1>
       ) : (
         <h1 className="text-5xl font-bold text-gray-800">
-          {getTitle(searchParams)}
+          {getTitle(searchParams!!)}
         </h1>
       )}
 
