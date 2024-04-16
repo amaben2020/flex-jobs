@@ -8,7 +8,7 @@ const Navbar = () => {
       <nav className="flex items-center justify-between">
         <Button asChild variant="ghost">
           <Link href="/">
-            <Image src={logo} alt="" height={70} width={80} />
+            <Image priority src={logo} alt="" height={70} width={80} />
           </Link>
         </Button>
 
