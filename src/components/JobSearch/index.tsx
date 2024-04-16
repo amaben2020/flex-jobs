@@ -3,8 +3,8 @@ import Link from "next/link";
 import { IHomePage } from "@/app/page";
 import JobCard from "@/components/Card";
 import { cn } from "@/lib/utils";
+import prisma from "@db/db";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import prisma from "../../../db/db";
 
 const JobSearch = async ({
   filters,
