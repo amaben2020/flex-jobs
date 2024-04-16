@@ -39,6 +39,21 @@ export async function generateMetadata({
   };
 }
 
+export async function generateStaticParams() {
+  const jobs = await prisma.job.findMany({
+    where: {
+      approved: true,
+    },
+    select: {
+      slug: true,
+    },
+  });
+
+  return jobs.map((job) => ({
+    slug: job.slug,
+  }));
+}
+
 const JobPage = async ({ params: { slug } }: IJob) => {
   const job = await getJob(slug);
   const applicationLink = job.applicationEmail
@@ -59,12 +74,14 @@ const JobPage = async ({ params: { slug } }: IJob) => {
           )}
 
           <h3>Company {job.companyName}</h3>
-          <p>Location: {job.location}</p>
-          <p>Salary: {job.salary}</p>
-          <p>Responsibilities & Duties: {job.description}</p>
-          <p>
-            {job.approved && <Badge className="bg-green-600">Approved </Badge>}
-          </p>
+          <h4>Location: {job.location}</h4>
+          <h5>Salary: {job.salary}</h5>
+          <h5>Responsibilities & Duties: {job.description}</h5>
+          <h5>
+            {job.approved && (
+              <Badge className="bg-green-600 text-black">Approved </Badge>
+            )}
+          </h5>
         </div>
 
         <aside>
