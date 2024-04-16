@@ -56,7 +56,7 @@ const JobSearch = async ({
     <div>
       {jobs.length ? (
         jobs.map((job) => (
-          <Link key={job.id} href={`/${job.slug}`}>
+          <Link key={job.id} href={`/jobs/${job.slug}`}>
             <JobCard job={job} />
           </Link>
         ))
