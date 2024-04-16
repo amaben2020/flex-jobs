@@ -42,7 +42,7 @@ const NewJobForm = () => {
         formData.append(key, value);
       }
     });
-    console.log("values", values);
+    // console.log("values", values);
 
     try {
       await createJobPosting(formData);
@@ -136,8 +136,8 @@ const NewJobForm = () => {
                 control={control}
                 name="companyLogo"
                 render={({ field }) => {
-                  console.log(field);
-                  console.log(field.value);
+                  // console.log(field);
+                  // console.log(field.value);
 
                   return (
                     <FormItem>

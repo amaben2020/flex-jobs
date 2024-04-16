@@ -61,7 +61,6 @@ const JobPage = async ({ params: { slug } }: IJob) => {
     ? `mailto:${job.applicationEmail}`
     : job.applicationUrl;
 
-  console.log(job.description);
   return (
     <main className="m-auto my-10 flex max-w-5xl flex-col items-center gap-5 md:flex-row md:items-start">
       <section className="flex w-full grow justify-between space-y-5">
