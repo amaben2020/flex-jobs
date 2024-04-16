@@ -52,7 +52,7 @@ export async function createJobPosting(formData: FormData) {
       description: description?.trim(),
       companyLogo: String(companyLogoUrl),
       salary: parseInt(salary),
-      approved: true,
+      // approved: true,
       applicationEmail,
       applicationUrl: applicationUrl?.trim(),
     },
