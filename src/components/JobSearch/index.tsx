@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { IHomePage } from "@/app/page";
 import JobCard from "@/components/Card";
+import { cn } from "@/lib/utils";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import prisma from "../../../db/db";
 
 const JobSearch = async ({
@@ -74,8 +76,65 @@ const JobSearch = async ({
       ) : (
         <p>No Jobs Found</p>
       )}
+
+      {jobs.length > 0 && (
+        <Pagination
+          currentPage={page}
+          totalPages={Math.ceil(count / jobsPerPage)}
+          filterValues={filters}
+        />
+      )}
     </div>
   );
 };
+
+function Pagination({
+  currentPage,
+  totalPages,
+  filterValues: { q, remote, type, location },
+}: any) {
+  function generatePageLink(page: number) {
+    const searchParams = new URLSearchParams({
+      ...(q && { q }),
+      ...(type && { type }),
+      ...(location && { location }),
+      ...(remote && { remote: true }),
+      page: page.toString(),
+    });
+
+    return `/?${searchParams.toString()}`;
+  }
+
+  return (
+    <div className="flex justify-between ">
+      <Link
+        href={generatePageLink(currentPage - 1)}
+        className={cn(
+          currentPage <= 1 && "invisible",
+          "flex items-center gap-2 font-semibold",
+        )}
+      >
+        <ArrowLeft size={16} />
+        Prev
+      </Link>
+
+      <span>
+        {" "}
+        Page{currentPage} of {totalPages}
+      </span>
+
+      <Link
+        href={generatePageLink(currentPage + 1)}
+        className={cn(
+          // currentPage > 1 && "invisible",
+          "flex items-center gap-2 font-semibold",
+        )}
+      >
+        <ArrowRight size={16} />
+        Next
+      </Link>
+    </div>
+  );
+}
 
 export default JobSearch;
