@@ -1,11 +1,11 @@
 "use server";
-import { nanoid } from "nanoid";
 import { createJobSchema } from "@/schema/createJobSchema";
-import path from "path";
-import { put } from "@vercel/blob";
-import { toSlug } from "@utils/toSlug";
 import prisma from "@db/db";
+import { toSlug } from "@utils/toSlug";
+import { put } from "@vercel/blob";
+import { nanoid } from "nanoid";
 import { redirect } from "next/navigation";
+import path from "path";
 
 export async function createJobPosting(formData: FormData) {
   //convert the formData into an object with Object.fromEntries([])
@@ -39,7 +39,7 @@ export async function createJobPosting(formData: FormData) {
     );
     companyLogoUrl = blob.url;
   }
-
+  console.log("description", description);
   // sending data to db
   await prisma.job.create({
     data: {

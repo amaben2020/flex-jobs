@@ -1,3 +1,4 @@
+import Markdown from "@/components/Markdown";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import prisma from "@db/db";
@@ -59,6 +60,8 @@ const JobPage = async ({ params: { slug } }: IJob) => {
   const applicationLink = job.applicationEmail
     ? `mailto:${job.applicationEmail}`
     : job.applicationUrl;
+
+  console.log(job.description);
   return (
     <main className="m-auto my-10 flex max-w-5xl flex-col items-center gap-5 md:flex-row md:items-start">
       <section className="flex w-full grow justify-between space-y-5">
@@ -76,7 +79,10 @@ const JobPage = async ({ params: { slug } }: IJob) => {
           <h3>Company {job.companyName}</h3>
           <h4>Location: {job.location}</h4>
           <h5>Salary: {job.salary}</h5>
-          <h5>Responsibilities & Duties: {job.description}</h5>
+          <h5>
+            Responsibilities & Duties:{" "}
+            <Markdown>{String(job.description)}</Markdown>
+          </h5>
           <h5>
             {job.approved && (
               <Badge className="bg-green-600 text-black">Approved </Badge>

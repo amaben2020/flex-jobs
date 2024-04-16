@@ -42,7 +42,7 @@ const NewJobForm = () => {
         formData.append(key, value);
       }
     });
-    console.log(values);
+    console.log("values", values);
 
     try {
       await createJobPosting(formData);
@@ -282,7 +282,9 @@ const NewJobForm = () => {
                     </Label>
                     <RichTextEditor
                       {...field}
-                      onChange={(draft) => draftToMarkdown(draft)}
+                      onChange={(draft) =>
+                        field.onChange(draftToMarkdown(draft))
+                      }
                       ref={field.ref}
                     />
                   </FormItem>
