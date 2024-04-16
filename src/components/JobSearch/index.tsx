@@ -6,9 +6,14 @@ import prisma from "../../../db/db";
 
 const JobSearch = async ({
   filters,
+  page,
 }: {
   filters: Pick<IHomePage, "searchParams">["searchParams"];
+  page?: number;
 }) => {
+  const jobsPerPage = 6;
+  const skip = (Number(page) - 1) * jobsPerPage;
+
   const searchTerm = filters?.q?.length
     ? filters?.q.split(" ").join(" & ")
     : "";
@@ -39,7 +44,7 @@ const JobSearch = async ({
     }),
   };
 
-  const jobs = await prisma?.job.findMany({
+  const jobsPromise = prisma?.job.findMany({
     where: {
       ...(searchTerm.length ? { OR: [{ ...buildQuery }] } : {}),
       ...(filters?.type || filters.location || filters.remote === "true"
@@ -50,8 +55,14 @@ const JobSearch = async ({
     orderBy: {
       createdAt: "desc",
     },
+    take: jobsPerPage,
+    skip,
   });
 
+  const countPromise = prisma.job.count();
+
+  const [jobs, count] = await Promise.all([jobsPromise, countPromise]);
+  console.log(count);
   return (
     <div>
       {jobs.length ? (

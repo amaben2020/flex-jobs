@@ -10,6 +10,7 @@ export interface IHomePage {
     type: string;
     location: string;
     remote: string;
+    page: number;
   };
 }
 export default async function Home({ searchParams }: Readonly<IHomePage>) {
@@ -21,7 +22,10 @@ export default async function Home({ searchParams }: Readonly<IHomePage>) {
           <JobFilterSidebar action={filterJobs} filterValues={searchParams} />
         </div>
         <div className="flex-grow">
-          <JobSearch filters={searchParams} />
+          <JobSearch
+            filters={searchParams}
+            page={searchParams?.page ? Number(searchParams?.page) : undefined}
+          />
         </div>
       </section>
     </main>
